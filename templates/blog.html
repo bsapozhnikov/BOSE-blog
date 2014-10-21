@@ -27,21 +27,15 @@ height: 100px; width: 400px;}
 
 <h2 class="options">Look at a current blog</h2>
 <ul>
-  <!-- We will need to make this into a for look to display as many -->
-  <!-- titles/links as there are blog posts. We will also need to us -->
-  <!-- %s to substitute "Title1" for the actual title of the post. We -->
-  <!-- also need to route each title the corresponding page -->
-	<li class="titles"><a href="http://www.google.com">Title1</a></li>
+  {% for key, value in posts.iteritems() %}
+  <li class="titles"><a href="/{{key}}">{{key}}</a></li>
+  {% endfor %}
 </ul>
 <br>
 <h2>Write a new post to a blog</h2>
-<form>
-Title: <input type="text" class="newtitle">
-</form>
-<br>
-<form>
-Post: <input type="text" class="newpost">
-<!-- We also need to make this submit button actually send the info to -->
-<!-- a form (directly the the database?) #justsayin -->
-<input type="submit" value="Submit">
+<form method="post">
+  Title: <input name="title" type="text" class="newtitle">
+  <br>
+  Post: <input name="post" type="text" class="newpost">
+  <input type="submit" value="Submit">
 </form>

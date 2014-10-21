@@ -31,12 +31,16 @@ def drop_table(name):
 
 
 def add_post(title, cont):
+    conn = sqlite3.connect('blog.db')
+    c = conn.cursor()
     c.execute("INSERT INTO posts VALUES (%s,%s)" % (title, cont))
     conn.commit()
     print "added %s to posts" % (title)
 
 
 def add_comment(post, cont):
+    conn = sqlite3.connect('blog.db')
+    c = conn.cursor()
     c.execute("INSERT INTO comments VALUES (%s,%s)" % (post, cont))
     conn.commit()
     print "added comment to %s" % (post)
@@ -48,13 +52,17 @@ def get_posts():
     keys - title
     value - post
     """
+    conn = sqlite3.connect('blog.db')
+    c = conn.cursor()
     posts = {}
-    for row in c.execute("SELECT title FROM posts"):
+    for row in c.execute("SELECT * FROM posts"):
         posts[row[0]] = row[1]
     return posts
 
 
 def get_comments(post):
+    conn = sqlite3.connect('blog.db')
+    c = conn.cursor()
     """returns comments from given post"""
     command = "SELECT comment FROM comments WHERE post=?"
     return [row[0] for row in c.execute("%s" % command, (post, ))]
@@ -63,26 +71,30 @@ def get_comments(post):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html')
+        return render_template('blog.html',posts=get_posts())
     else:
         # validate and add post to blog
         title = request.form['title']
         post = request.form['post']
         # Currently, there is no validation of the title/post
         add_post(title, post)
+        return render_template('blog.html',posts=get_posts())
 
 
 @app.route('/<title>', methods=['GET', 'POST'])
 def show_post(title):
+    posts = get_posts()
+    comments = get_comments(title)
     if request.method == 'GET':
-        pass
+        return render_template('title.html',title=title,content=posts[title],comments=comments)
         # show post
     else:
         # add comment to post
         # show post
         comment = request.form['comment']
         add_comment(title, comment)
-
+        comments = get_comments(title)
+        return render_template('title.html',title=title,content=posts[title],comments=comments)
 
 @app.route("/resetdb")
 def create_tables():
@@ -95,3 +107,4 @@ def create_tables():
 if __name__ == '__main__':
     app.debug = True
     app.run()
+
