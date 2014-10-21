@@ -56,13 +56,14 @@ def get_posts():
 
 def get_comments(post):
     """returns comments from given post"""
-    return [row[0] for row in c.execute("SELECT comment FROM comments WHERE post=?",(post,))]
+    command = "SELECT comment FROM comments WHERE post=?"
+    return [row[0] for row in c.execute("%s" % command, (post, ))]
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('blog.html')
+        return render_template('index.html')
     else:
         # validate and add post to blog
         title = request.form['title']
@@ -87,12 +88,10 @@ def show_post(title):
 def create_tables():
     drop_table('posts')
     drop_table('comments')
-    create_table('posts', {'title':'text', 'post':'text'})
-    create_table('comments', {'post':'text', 'comment':'text'})
+    create_table('posts', {'title': 'text', 'post': 'text'})
+    create_table('comments', {'post': 'text', 'comment': 'text'})
     return redirect("/")
 
 if __name__ == '__main__':
     app.debug = True
     app.run()
-
-
