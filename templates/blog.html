@@ -39,22 +39,25 @@
     {% endfor %}
     </div>
 </div>
-<div id="lower-form">
-    <form class="pure-form pure-form-aligned" method="post">
-        <fieldset>
-            <div class="pure-control-group">
-                <label for="title">Title</label>
-                <input id="title" name="title" type="text">
-            </div>
-            <div class="pure-control-group">
-                <label for="post">Post</label>
-                <input id="post" name="post" type="text">
-            </div>
-            <div class="pure-controls">
-                <input type="submit" value="Submit" class="pure-button pure-button-primary">
-            </div>
-        </fieldset>
-    </form>
+<div id="container">
+    <div class="lower-form-container">
+        <h2>What are you thinking about?</h2>
+        <form class="pure-form pure-form-stacked" method="post">
+            <fieldset>
+                <div class="pure-control-group">
+                    <label for="title">Title</label>
+                    <input class="pure-input" id="title" name="title" type="text">
+                </div>
+                <div class="pure-control-group">
+                    <label for="post">Post</label>
+                    <input class="pure-input" id="post" name="post" type="text">
+                </div>
+                <div class="pure-controls">
+                    <input type="submit" value="Submit" class="pure-button pure-button-primary">
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </div>
 
 </body>
