@@ -49,8 +49,8 @@ def add_comment(post, cont):
 def get_posts():
     """returns a dictionary of posts
 
-    keys - title
-    value - post
+    the key of the dictionary is the title of the post
+    the value of the dictionary is content
     """
     conn = sqlite3.connect('blog.db')
     c = conn.cursor()
@@ -71,7 +71,9 @@ def get_comments(post):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('blog.html',posts=get_posts())
+        posts = get_posts()
+        print posts
+        return render_template('blog.html', posts = posts)
     else:
         # validate and add post to blog
         title = request.form['title']
@@ -98,8 +100,8 @@ def show_post(title):
 
 @app.route("/resetdb")
 def create_tables():
-    drop_table('posts')
-    drop_table('comments')
+    #drop_table('posts')
+    #drop_table('comments')
     create_table('posts', {'title': 'text', 'post': 'text'})
     create_table('comments', {'post': 'text', 'comment': 'text'})
     return redirect("/")
