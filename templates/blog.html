@@ -16,7 +16,6 @@
         <ul>
             <li class="pure-menu-selected"><a href="#">Home</a></li>
             <li><a href="#lower-form">Post</a></li>
-            <li><a href="#">Sign Up</a></li>
         </ul>
     </div>
 </div>
@@ -40,15 +39,23 @@
     {% endfor %}
     </div>
 </div>
-    <div id="lower-form">
-        <h2>Write a new post to a blog</h2>
-        <form class="pure-form" method="post">
-          Title: <input name="title" type="text" class="newtitle">
-          <br>
-          Post: <input name="post" type="text" class="newpost">
-          <input type="submit" value="Submit">
-        </form>
-    </div>
+<div id="lower-form">
+    <form class="pure-form pure-form-aligned" method="post">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="title">Title</label>
+                <input id="title" name="title" type="text">
+            </div>
+            <div class="pure-control-group">
+                <label for="post">Post</label>
+                <input id="post" name="post" type="text">
+            </div>
+            <div class="pure-controls">
+                <input type="submit" value="Submit" class="pure-button pure-button-primary">
+            </div>
+        </fieldset>
+    </form>
+</div>
 
 </body>
 

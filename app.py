@@ -100,8 +100,8 @@ def show_post(title):
 
 @app.route("/resetdb")
 def create_tables():
-    #drop_table('posts')
-    #drop_table('comments')
+    drop_table('posts')
+    drop_table('comments')
     create_table('posts', {'title': 'text', 'post': 'text'})
     create_table('comments', {'post': 'text', 'comment': 'text'})
     return redirect("/")

@@ -1,10 +1,11 @@
 body {
-    background: url(http://subtlepatterns.com/patterns/scribble_light.png) ;
+    background: #CCCCFF;
 }
 
 .header-image{
     text-align: center;
 }
+
 .home-menu {
     padding: 0.5em;
     text-align: center;
@@ -52,7 +53,7 @@ body {
 }
 
 #wrapper .pin:hover {
-    box-shadow: 0 6px 6px rgba(34, 25, 25, 0.4);
+    box-shadow: 0 6px 6px rgba(102, 178, 255, 0.4);
 }
 
 #wrapper .pin h1 {
