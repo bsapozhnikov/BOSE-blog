@@ -33,7 +33,7 @@ def drop_table(name):
 def add_post(title, cont):
     conn = sqlite3.connect('blog.db')
     c = conn.cursor()
-    c.execute("INSERT INTO posts VALUES ('%s','%s')" % (title, cont))
+    c.execute("INSERT INTO posts VALUES ('%s','%s')" % (title,cont))
     conn.commit()
     print "added %s to posts" % (title)
 
@@ -41,7 +41,7 @@ def add_post(title, cont):
 def add_comment(post, cont):
     conn = sqlite3.connect('blog.db')
     c = conn.cursor()
-    c.execute("INSERT INTO comments VALUES ('%s','%s')" % (post, cont))
+    c.execute("INSERT INTO comments VALUES ('%s','%s')" % (cont, post))
     conn.commit()
     print "added comment to %s" % (post)
 
@@ -64,10 +64,13 @@ def get_comments(post):
     conn = sqlite3.connect('blog.db')
     c = conn.cursor()
     """returns comments from given post"""
-    command = "SELECT comment FROM comments WHERE post='%s'"%(post)
-    print "getting comment"
-    print "here's the result: "+`[row for row in c.execute(command)]`
-    return [row[0] for row in c.execute(command)]
+    command = "SELECT comment FROM comments WHERE post='%s';"%(post)
+    print "getting comments from "+post
+    print "here's the result: "+`c.execute(command)`
+    for row in c.execute(command):
+        print "ROW: "
+    print '\n'
+    return [row[0] for row in c.execute(command).fetchall()]
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -89,6 +92,7 @@ def index():
 def show_post(title):
     posts = get_posts()
     comments = get_comments(title)
+    print "title: "+title
     if request.method == 'GET':
         return render_template('title.html',title=title,content=posts[title],comments=comments)
         # show post
