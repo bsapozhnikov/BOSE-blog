@@ -1,27 +1,22 @@
-<style>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/blog.css')}}"
+</head>
 
-body { background-color: gray; }
-h1 { text-align:center;
-font-size: 60px;
-color: white;
-font-family: "Courier New";
-border-style:solid;}
-h2 { color: white;
-font-family: "Courier New";
-font-size: 25px; }
-.blogpost { color: black;
-font-family: "Courier New";
-font-family: 20px; }
+<div class="header">
+  <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal">
+        <a href="/"><img src="static/images/bose-logo.png"></a>
+    </div>
+</div>
 
-</style>
-
-<h1>Welcome to the BOSE blog </h1>
-<br>
-<h2>Title1</h2>
+<div class="content">
+<h2 class="options">{{title}}</h2>
 <ul>
-  <li class="blogpost">This is a blogpost lalalalala why don't pineapples have sleeves? Wears/where's your paddle? This is basically the new Facebook #innovation </li>
+  <li class="options">{{posts}}</li>
 </ul>
 
-<button type="button"><a href="http://www.google.com">Return home</a></button>
+</body>
 
-
+</html>
