@@ -14,7 +14,7 @@
 <div class="content">
 <h2 class="options">{{title}}</h2>
 <ul>
-  <li class="options">{{content}}</li>
+  <li class="options">{{posts}}</li>
 </ul>
 
 </body>
