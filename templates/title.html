@@ -16,8 +16,13 @@
 <ul>
   <li class="options">{{content}}</li>
 </ul>
+<ul>
+{% for com in comments %}
+<li class="comment">{{com}}</li>
+{% endfor %}
+</ul>
 <br>
-<form method = "post">
+<form method="post">
   Comment: <input name="comment", type="text", class="newcomment">
   <br>
   <input type="submit", value="Submit">

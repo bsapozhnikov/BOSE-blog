@@ -64,8 +64,10 @@ def get_comments(post):
     conn = sqlite3.connect('blog.db')
     c = conn.cursor()
     """returns comments from given post"""
-    command = "SELECT comment FROM comments WHERE post=?"
-    return [row[0] for row in c.execute("%s" % command, (post, ))]
+    command = "SELECT comment FROM comments WHERE post='%s'"%(post)
+    print "getting comment"
+    print "here's the result: "+`[row for row in c.execute(command)]`
+    return [row[0] for row in c.execute(command)]
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -96,6 +98,7 @@ def show_post(title):
         comment = request.form['comment']
         add_comment(title, comment)
         comments = get_comments(title)
+        print "comments: "+`comments`
         return render_template('title.html',title=title,content=posts[title],comments=comments)
 
 @app.route("/resetdb")
