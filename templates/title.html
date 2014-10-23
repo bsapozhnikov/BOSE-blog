@@ -5,27 +5,41 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/blog.css')}}"
 </head>
 
-<div class="header">
-  <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal">
-        <a href="/"><img src="static/images/bose-logo.png"></a>
+<body >
+    <div class="header">
+      <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal">
+            <a href="/"><img src="static/images/bose-logo.png"></a>
+        </div>
     </div>
-</div>
 
-<div class="content">
-<h2 class="options">{{title}}</h2>
-<div class="options">{{content}}</div>
-<ul>
-{% for com in comments %}
-<li class="comment">{{com}}</li>
-{% endfor %}
-</ul>
-<br>
-<form method="post">
-  Comment: <input name="comment", type="text", class="newcomment">
-  <br>
-  <input type="submit", value="Submit">
+    <div class="posts">
+        <h1 class="content-subhead">Original Post</h1>
 
-</form>
+        <h1>{{title}}</h1>
+        <div class="options">{{content}}</div>
+    </div>
+
+    <div class="posts">
+        <h1 class="content-subhead">Comments</h1>
+
+        <div class="comments">
+        {% set count = 0 %}
+        {% for com in comments %}
+            <div class="single-comment">
+                <h3>Comment {{count}}</h3>
+                {{com}}
+                {% set count = count + 1 %}
+            </div>
+        {% endfor %}
+        </div>
+        <h1 class="content-subhead">What are your thoughts?</h1>
+        <form class="pure-form pure-form-aligned" method="post">
+          <input name="comment", type="text", class="newcomment" placeholder="Comment">
+          <input class="pure-button pure-button-primary" type="submit", value="Submit">
+
+        </form>
+    </div>
+    <div style="margin-top: 100px;"></div>
 </body>
 
 </html>
